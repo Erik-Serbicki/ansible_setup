@@ -5,6 +5,7 @@
   pre_tasks:
 
   - name: install updates (Ubuntu)
+    tags: general,update
     apt:
       upgrade: dist
       update_cache: yes
@@ -15,6 +16,7 @@
   tasks:
 
   - name: install neovim and tmux 
+    tags: neovim,tmux
     package:
       name: 
         - neovim
