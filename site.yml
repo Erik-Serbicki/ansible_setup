@@ -2,7 +2,7 @@
 
 - hosts: all
   become: true
-  tasks:
+  pre_tasks:
 
   - name: install updates (Ubuntu)
     apt:
@@ -10,10 +10,13 @@
       update_cache: yes
     when: ansible_distribution == "Ubuntu"
 
+- hosts: main
+  become: true
+  tasks:
+
   - name: install neovim and tmux 
     package:
       name: 
         - neovim
         - tmux
       state: latest
-      update_cache: yes
