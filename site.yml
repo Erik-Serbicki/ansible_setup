@@ -4,6 +4,12 @@
   become: true
   tasks:
 
+  - name: install updates (Ubuntu)
+    apt:
+      upgrade: dist
+      update_cache: yes
+    when: ansible_distribution == "Ubuntu"
+
   - name: install neovim and tmux 
     package:
       name: 
