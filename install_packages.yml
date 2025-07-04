@@ -7,7 +7,7 @@
   - name: install neovim and tmux 
     package:
       name: 
-        - "{{ neovim_package }}" 
-        - "{{ tmux_package }}" 
+        - neovim
+        - tmux
       state: latest
       update_cache: yes
