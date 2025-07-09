@@ -1,0 +1,44 @@
+---
+
+- hosts: all
+  become: true
+  pre_tasks:
+
+  - name: updating repo cache (Ubuntu)
+    tags: always,updates 
+    apt:
+      update_cache: yes
+      changed_when: false
+    when: ansible_distribution == "Ubuntu"
+
+- hosts: all
+  become: true
+  tasks:
+
+  - name: add ssh key for simone
+    tags: always
+    ansible.posix.authorized_key:
+      user: simone
+      key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICUldSMpqV+IWPr+jgJUers37nRtyRfsLYGnTbZx1PGK ansible"
+
+- hosts: main
+  become: true
+  tasks:
+
+  - name: install gcc and tmux 
+    tags: gcc,tmux,ubuntu
+    apt:
+      name: 
+        - gcc 
+        - tmux
+      state: latest
+    when: ansible_distribution == "Ubuntu"
+
+  - name: copy default tmux config
+    tags: tmux,config
+    copy:
+      src: default_tmux_config.conf
+      dest: /home/erik/.tmux.conf
+      owner: erik
+      group: erik
+      mode: 0644

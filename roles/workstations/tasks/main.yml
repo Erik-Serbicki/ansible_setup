@@ -1,0 +1,17 @@
+- name: install gcc and tmux 
+  tags: gcc,tmux,ubuntu
+  apt:
+    name: 
+      - gcc 
+      - tmux
+    state: latest
+  when: ansible_distribution == "Ubuntu"
+
+- name: copy default tmux config
+  tags: tmux,config
+  copy:
+    src: default_tmux_config.conf
+    dest: /home/erik/.tmux.conf
+    owner: erik
+    group: erik
+    mode: 0644
