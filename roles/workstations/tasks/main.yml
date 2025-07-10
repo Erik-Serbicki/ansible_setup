@@ -1,11 +1,10 @@
 - name: install gcc and tmux 
   tags: gcc,tmux,ubuntu
-  apt:
+  package:
     name: 
-      - gcc 
-      - tmux
+      - "{{ tmux_package_name }}" 
+      - "{{ gcc_package_name }}" 
     state: latest
-  when: ansible_distribution == "Ubuntu"
 
 - name: copy default tmux config
   tags: tmux,config
