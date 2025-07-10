@@ -1,9 +1,10 @@
-- name: install gcc and tmux 
+- name: install gcc, tmux, and tar 
   tags: gcc,tmux,ubuntu
   package:
     name: 
       - "{{ tmux_package_name }}" 
       - "{{ gcc_package_name }}" 
+      - tar
     state: latest
 
 - name: copy default tmux config
@@ -14,3 +15,24 @@
     owner: erik
     group: erik
     mode: 0644
+
+- name: install latest neovim
+  tags: neovim
+  unarchive:
+    src: https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz
+    dest: /opt
+    remote_src: yes
+  notify: link_neovim    
+
+- name: install docker
+  tags: docker
+  package:
+    name:
+      - docker.io
+      - docker-compose
+    state: latest
+
+- name: create docker directory
+  tags: docker
+  command:
+    cmd: "mkdir /home/erik/docker"
