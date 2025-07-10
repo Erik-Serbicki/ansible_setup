@@ -1,0 +1,4 @@
+tmux_package_name: tmux
+gcc_package_name: gcc
+ssh_users: "erik simone"
+ssh_template_file: sshd_config_ubuntu.j2
