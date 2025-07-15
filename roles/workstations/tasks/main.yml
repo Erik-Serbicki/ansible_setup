@@ -36,3 +36,18 @@
   tags: docker
   command:
     cmd: "mkdir /home/erik/docker"
+
+- name: install zoxide and fzf
+  tags: zoxide,fzf,terminal
+  package:
+    name:
+      - fzf
+      - zoxide
+
+- name: initialize zoxide 
+  tags: terminal,zoxide
+  shell: |
+    echo 'eval "$(zoxide init --cmd cd bash)"' >> /home/erik/.bashrc
+    source /home/erik/.bashrc
+  args:
+    executable: /usr/bin/bash
