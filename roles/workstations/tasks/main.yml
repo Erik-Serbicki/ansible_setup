@@ -5,6 +5,7 @@
       - "{{ tmux_package_name }}" 
       - "{{ gcc_package_name }}" 
       - tar
+      - git
     state: latest
 
 - name: copy default tmux config
@@ -23,6 +24,11 @@
     dest: /opt
     remote_src: yes
   notify: link_neovim    
+
+- name: clone my neovim config
+  tags: neovim
+  command:
+    cmd: "git clone https://github.com/Erik-Serbicki/neovim-config.git ~/.config/nvim"
 
 - name: install docker
   tags: docker
